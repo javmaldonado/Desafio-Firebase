@@ -1,24 +1,15 @@
-# desafio-firebase
+## Desafío-Firebase
 
-## Project setup
-```
-npm install
-```
+Este código realiza las siguientes tareas:
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+1. Conecta con la base de datos de Firebase Firestore y almacenar datos recibidos en un objeto data().
 
-### Compiles and minifies for production
-```
-npm run build
-```
+2. Crea un componente que agregue nuevos usuarios a la base de datos.
 
-### Lints and fixes files
-```
-npm run lint
-```
+3. Obtiene una lista que muestra todos los usuarios registrados de la colección "usuarios".
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+4. Muestra la lista de usuarios en la interfaz de usuario.
+
+5. Permite eliminar usuarios de la lista y de la base de datos.
+
+6. Actualiza la lista en tiempo real cuando se producen cambios en la base de datos.
