@@ -5,12 +5,12 @@
       <div class="mb-3 mt-4 pt-4">
         <!-- Input nombre -->
         <label class="form-label">Nombre</label>
-        <input type="text" v-model="nuevoUsuario.nombre" class="form-control" aria-describedby="emailHelp">
+        <input type="text" v-model="nuevoUsuario.nombre" @input="handleInput" name="nombre" class="form-control">
       </div>
       <div class="mb-3">
         <!-- Input email -->
         <label class="form-label">Email</label>
-        <input type="email" v-model="nuevoUsuario.email" class="form-control">
+        <input type="email" v-model="nuevoUsuario.email" @input="handleInput" name="email" class="form-control">
       </div>
       <!-- Permite agregar a un nuevo usuario -->
       <button type="submit" class="btn btn-primary">Agregar</button>
@@ -18,40 +18,26 @@
   </div>
 </template>
 
+
 <script>
-// Importar las funciones de Firebase //
-import { getFirestore, collection, addDoc } from 'firebase/firestore';
-import firebaseApp from '../firebaseconfig';
+import { mapActions, mapGetters } from 'vuex';
 
 export default {
-  data() {
-    return {
-      // Objeto que almacenara los nuevos datos nombre y email //
-      nuevoUsuario:
-      {
-        nombre: '',
-        email: ''
-      }
-    };
+  computed: {
+    ...mapGetters(['nuevoUsuario'])
   },
   methods: {
-    async addUser() {
-      // Verifica si el campo nombre y email reciben un string, si alguno esta vacio termina de ejecutarse //
-      if (this.nuevoUsuario.nombre === '' || this.nuevoUsuario.email === '')
-        return;
-      // Conecta con Firestore //
-      const db = getFirestore(firebaseApp);
-      // Referencia a la colección de Firestore que se llama usuarios //
-      const usuarioRef = collection(db, 'usuarios');
-      // addDoc como dice agrega un nuevo documento a la colección llamada usuarios //
-      await addDoc(usuarioRef, { nombre: this.nuevoUsuario.nombre, email: this.nuevoUsuario.email });
-      // Limpia los campos después de agregar un usuario nuevo //
-      this.nuevoUsuario = { nombre: '', email: '' };
-
+    ...mapActions(['addUser', 'updateNuevoUsuario']),
+    handleInput(event) {
+      const { name, value } = event.target;
+      this.updateNuevoUsuario({ ...this.nuevoUsuario, [name]: value });
     }
   }
 };
 </script>
+
+
+
 <style scoped>
 .form-container {
   display: flex;
