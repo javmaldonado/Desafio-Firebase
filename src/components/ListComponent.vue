@@ -4,13 +4,15 @@
       <h3>Lista usuarios</h3>
       <li class="list-item" v-for="(usuario, index) in usuarios" :key="index">
         {{ usuario.nombre }} - {{ usuario.email }}
-        <button @click="deleteUsuario(usuario.id)" type="submit" class="button-eliminar btn btn-primary">Eliminar</button>
+        <button @click="deleteUsuario(usuario.id)" type="submit"
+          class="button-eliminar btn btn-primary">Eliminar</button>
       </li>
     </ul>
   </div>
 </template>
 
 <script>
+// Importar funciones de vuex //
 import { mapActions, mapGetters } from 'vuex';
 
 export default {
@@ -25,10 +27,6 @@ export default {
   }
 };
 </script>
-
-
-
-
 
 <style scoped>
 .container {

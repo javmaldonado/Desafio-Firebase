@@ -15,23 +15,21 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex';
+import { mapActions, mapState } from 'vuex';
 
 export default {
   computed: {
-    ...mapGetters(['nuevoUsuario'])
+    ...mapState(['nuevoUsuario'])
   },
   methods: {
     ...mapActions(['addUser', 'updateNuevoUsuario']),
-    handleAddUser() {
-      this.addUser();
+    async handleAddUser() {
+      await this.addUser();
       this.updateNuevoUsuario({ nombre: '', email: '' });
     }
   }
 };
 </script>
-
-
 
 <style scoped>
 .form-container {

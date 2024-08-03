@@ -88,16 +88,15 @@ const store = createStore({
         const database = getFirestore(firebaseApp);
         // Referencia a la colección de Firestore que se llama usuarios //
         const usuarioRef = collection(database, "usuarios");
-        const docRef = await addDoc(usuarioRef, state.nuevoUsuario);
-        // Limpia los campos después de agregar un usuario nuevo //
-        commit("addUsuario", { id: docRef.id, ...state.nuevoUsuario });
-        commit("resetNuevoUsuario");
+        await addDoc(usuarioRef, state.nuevoUsuario);
         swal("Usuario agregado correctamente.", { icon: "success" });
+        commit("resetNuevoUsuario");
       } catch (error) {
         console.error("Error al agregar usuario:", error);
         swal("Ocurrió un error al agregar el usuario.", { icon: "error" });
       }
     },
+    // Actualiza la lista //
     updateNuevoUsuario({ commit }, nuevoUsuario) {
       commit("updateNuevoUsuario", nuevoUsuario);
     },
